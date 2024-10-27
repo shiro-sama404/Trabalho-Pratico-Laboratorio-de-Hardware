@@ -13,41 +13,43 @@ architecture behavioral of trava is
 begin
 
     process(input)
+
     begin
         case input is
             when "0000" =>
-                display <= ""; 
+                display <= "11111100"; -- 0
             when "0001" =>
-                display <= ""; 
+                display <= "01100000"; -- 1
             when "0010" =>
-                display <= ""; 
+                display <= "11011010"; -- 2
             when "0011" =>
-                display <= ""; 
+                display <= "11110010"; -- 3
             when "0100" =>
-                display <= ""; 
+                display <= "01100110"; -- 4
             when "0101" =>
-                display <= ""; 
+                display <= "10110110"; -- 5
             when "0110" =>
-                display <= ""; 
+                display <= "10111110"; -- 6
             when "0111" =>
-                display <= ""; 
+                display <= "11100000"; -- 7
             when "1000" =>
-                display <= ""; 
+                display <= "11111100"; -- 8
             when "1001" =>
-                display <= ""; 
+                display <= "11100110"; -- 9
             when "1010" =>
-                display <= ""; 
+                display <= "11101110"; -- A
             when "1011" =>
-                display <= ""; 
+                display <= "00111110"; -- b
             when "1100" =>
-                display <= ""; 
+                display <= "10011100"; -- C
             when "1101" =>
-                display <= ""; 
+                display <= "01111010"; -- d
             when "1110" =>
-                display <= ""; 
+                display <= "10011110"; -- E
             when "1111" =>
-                display <= ""; 
+                display <= "10001110"; -- F
         end case;
+        
     end process;
 
 end architecture;

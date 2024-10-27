@@ -23,27 +23,33 @@ architecture behavioral of trava is
 begin
 
     process(reset, clock, input)
-        variable input_decimal : integer;
+        variable input_decimal : natural;
     begin
 
         if reset = '1' then
-            segundos <= tempo_para_desarme;
+            segundos <= std_logic_vector(to_unsigned(tempo_para_desarme, 8));
             trava <= '1';
 
         elsif input'event then
+
             if trava = '1' and segundos > 0 then
+
                 input_decimal = to_integer(unsigned(input));
+
                 if input_decimal = senha then
                     trava <= '0';
-
                 end if;
+
             end if;
 
         elsif clock'event and clock = '1' then
-            if trava = '1' and segundos > 0 then
-                segundos <= segundos -1;
 
+            if trava = '1' and segundos > 0 then
+                segundos <= std_logic_vector(unsigned(segundos) - 1);
             end if;
+
         end if;
+
     end process;
+    
 end architecture;
