@@ -5,8 +5,8 @@ entity tb_binto7seg is
 end entity;
 
 architecture testbench of tb_binto7seg is
-    signal input: in std_logic_vector(3 downto 0);    -- Valor binario a ser mostrado
-    signal display: out std_logic_vector(7 downto 0); -- Leds do Display de 7 seg.
+    signal input : std_logic_vector(3 downto 0);    -- Valor binario a ser mostrado
+    signal display : std_logic_vector(7 downto 0); -- Leds do Display de 7 seg.
 
     -- Matriz com os valores esperados para cada entrada de 0 a 15
     type display_array is array (0 to 15) of std_logic_vector(7 downto 0);
@@ -38,7 +38,7 @@ begin
     -- Processo de estímulos
     stim_proc: process
     begin
-        - Testar todos os valores de 0 a 15
+        -- Testar todos os valores de 0 a 15
         for i in 0 to 15 loop
 
             input <= std_logic_vector(to_unsigned(i, 4));
