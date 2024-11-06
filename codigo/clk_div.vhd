@@ -4,12 +4,12 @@ use ieee.std_logic_1164.all;
 entity clk_div is
 
     generic (
-        max: natural;             -- Frequência do clock que será dividido para 1hz
+        max: natural             -- Frequência do clock que será dividido para 1hz
     );
 
     port (
         clk_in   : in std_logic;   -- Entrada de clock
-        clk_out : out std_logic;   -- Saída: clock dividido
+        clk_out : out std_logic   -- Saída: clock dividido
     );
 
 end entity;
@@ -33,6 +33,6 @@ begin
 
     end process;
 
-    clk_out < clk_div;
+    clk_out <= clk_div;
 
 end architecture;
