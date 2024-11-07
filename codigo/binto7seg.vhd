@@ -3,17 +3,15 @@ use ieee.std_logic_1164.all;
 
 entity binto7seg is
     port (
-        input  : in std_logic_vector(3 downto 0);  -- Valor binario a ser mostrado
-        display: out std_logic_vector(7 downto 0) -- Leds do Display de 7 seg.
+        input   : in std_logic_vector(3 downto 0); -- Valor binario a ser mostrado
+        display : out std_logic_vector(7 downto 0) -- Leds do Display de 7 seg.
     );
 end entity;
 
-architecture behavioral of trava is
-
+architecture behavioral of binto7seg is
 begin
 
     process(input)
-
     begin
         case input is
             when "0000" =>
@@ -48,8 +46,9 @@ begin
                 display <= "10011110"; -- E
             when "1111" =>
                 display <= "10001110"; -- F
+            when others =>
+                display <= "00000000"; -- padrão
         end case;
-        
-    end process;
 
+    end process;
 end architecture;
