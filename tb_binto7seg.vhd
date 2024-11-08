@@ -39,6 +39,8 @@ begin
     -- Processo de estímulos
     stim_proc: process
     begin
+        report "Começo do teste";
+
         -- Testar todos os valores de 0 a 15
         for i in 0 to 15 loop
             input <= std_logic_vector(to_unsigned(i, 4));
@@ -48,6 +50,7 @@ begin
             assert display = expected_display(i) report "Erro!!! Numero: '" & integer'image(i) & "' nao mapeado corretamente!" severity error;
         end loop;
 
+        report "Fim do teste";
         wait;
     end process;
 end architecture;

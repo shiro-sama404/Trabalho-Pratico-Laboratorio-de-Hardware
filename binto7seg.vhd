@@ -3,8 +3,8 @@ use ieee.std_logic_1164.all;
 
 entity binto7seg is
     port (
-        input   : in std_logic_vector(3 downto 0); -- Valor binario a ser mostrado
-        display : out std_logic_vector(7 downto 0) -- Leds do Display de 7 seg.
+        input   : in  std_logic_vector(3 downto 0); -- Valor binário a ser mostrado
+        display : out std_logic_vector(7 downto 0)  -- Leds do Display de 7 seg.
     );
 end entity;
 
@@ -47,7 +47,7 @@ begin
             when "1111" =>
                 display <= "10001110"; -- F
             when others =>
-                display <= "00000000"; -- padrão
+                display <= "00000000"; -- padrão (apagado)
         end case;
 
     end process;
