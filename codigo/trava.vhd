@@ -4,8 +4,8 @@ use ieee.numeric_std.all;
 
 entity trava is
     generic (
-        senha              : natural range 0 to 255; -- Número usado como senha para destravar
-        tempo_para_desarme : natural range 0 to 255  -- Em segundos
+        senha              : natural range 0 to 255;           -- Número usado como senha para destravar
+        tempo_para_desarme : natural range 0 to 255            -- Em segundos
     );
 
     port (
@@ -36,9 +36,7 @@ begin
                 report "Tempo restante: " &natural'image(remaining_time);
             end if;
             
-        end if;
-            
-        if input'event then
+        elsif input'event then
             report "Nova entrada";
             if is_locked = '1' and remaining_time > 0 then
                 input_decimal := to_integer(unsigned(input));
@@ -51,9 +49,8 @@ begin
             elsif remaining_time <= 0 then
                 report "Tempo esgotado!";
             end if;
-
         end if;
-        
+            
         travado  <= is_locked;
         segundos <= std_logic_vector(to_unsigned(remaining_time, 8));
     end process;
