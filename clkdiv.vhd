@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 
 entity clkdiv is
     generic (
-        max     : natural                    -- Frequência do clock que será dividido para 1hz
+        max     : natural := 50000000        -- Frequência do clock que será dividido para 1hz
     );
 
     port (

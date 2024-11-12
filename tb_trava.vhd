@@ -7,18 +7,19 @@ end entity;
 
 architecture test of tb_trava is
 
-    constant senha              : natural range 0 to 255 := 84;    -- Número usado como senha para destravar
-    constant tempo_para_desarme : natural range 0 to 255 := 10;    -- Em segundos
-    constant cycle_duration     : time                   := 1 sec; -- duração do ciclo de clock
+    constant senha              : natural range 0 to 255 := 84;                    -- Número usado como senha para destravar
+    constant tempo_para_desarme : natural range 0 to 255 := 10;                    -- Em segundos
+    constant cycle_duration     : time                   := 1 sec;                 -- duração do ciclo de clock
 
-    signal   clock              : std_logic := '1';                -- Entrada de clock 1hz para contagem do tempo
-    signal   reset              : std_logic := '0';                -- Reset do tempo
-    signal   input              : std_logic_vector(7 downto 0);    -- Chaves para destravar
+    signal   clock              : std_logic := '1';                                -- Entrada de clock 1hz para contagem do tempo
+    signal   reset              : std_logic := '0';                                -- Reset do tempo
+    signal   input              : std_logic_vector(7 downto 0) := (others => '0'); -- Chaves para destravar
 
-    signal   segundos           : std_logic_vector(7 downto 0);    -- Tempo para desbloqueio
-    signal   travado            : std_logic;                       -- Sinal de led: 1 para travado, 0 para destravado
+    signal   segundos           : std_logic_vector(7 downto 0);                    -- Tempo para desbloqueio
+    signal   travado            : std_logic := '1';                                -- Sinal de led: 1 para travado, 0 para destravado
 
 begin
+
     lock      : entity work.trava(behavioral)
                 generic map (senha, tempo_para_desarme)
                 port    map (clock, reset, input, segundos, travado);
@@ -28,7 +29,7 @@ begin
     begin
         -- Ciclo de clock de 1 segundo
         while true loop
-            wait for cycle_duration;
+            wait for cycle_duration/2;
             clock <= not clock;
         end loop;
         wait;
@@ -39,12 +40,13 @@ begin
         procedure reset_fsm is
         begin
             reset <= '1';
+            input <= std_logic_vector(to_unsigned(0, 8));
             wait for cycle_duration;
             reset <= '0';
             wait for cycle_duration;
         end procedure;
     begin
-        report "Comeco do teste";
+        report "!======== Comeco do testbench ========!";
 
         -- Tentar desbloquear com senha certa fora do tempo de desarme
         reset_fsm;
@@ -52,23 +54,26 @@ begin
 
         input <= std_logic_vector(to_unsigned(senha, 8));
         wait for 10 ns;
-        assert travado = '1' report "Trava desbloqueada com senha certa fora do tempo de desarme" severity error;
+        
+        assert travado = '1' report "Trava desbloqueada com senha certa ("&integer'image(to_integer(unsigned(input)))&") fora do tempo de desarme ("&integer'image(to_integer(unsigned(segundos)))&")" severity error;
         
         -- Tentar desbloquear com senha errada dentro do tempo de desarme
         reset_fsm;
 
         input <= std_logic_vector(to_unsigned(111, 8));
         wait for 10 ns;
-        assert travado = '1' report "Trava desbloqueada com senha errada dentro do tempo de desarme" severity error;
+
+        assert travado = '1' report "Trava desbloqueada com senha errada ("&integer'image(to_integer(unsigned(input)))&") dentro do tempo de desarme ("&integer'image(to_integer(unsigned(segundos)))&")" severity error;
         
         -- Tentar desbloquear com senha certa dentro do tempo de desarme
         reset_fsm;
 
         input <= std_logic_vector(to_unsigned(senha, 8));
         wait for 10 ns;
-        assert travado = '0' report "Trava bloqueada com senha certa dentro do tempo de desarme" severity error;
+        
+        assert travado = '0' report "Trava bloqueada com senha certa ("&integer'image(to_integer(unsigned(input)))&") dentro do tempo de desarme ("&integer'image(to_integer(unsigned(segundos)))&")" severity error;
 
-        report "Fim do teste";
+        report "!======== Fim do testbench ========!";
         wait;
     end process;
 end architecture;

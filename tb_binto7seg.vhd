@@ -39,7 +39,7 @@ begin
     -- Processo de estímulos
     stim_proc: process
     begin
-        report "Começo do teste";
+        report "!======== Comeco do testbench ========!";
 
         -- Testar todos os valores de 0 a 15
         for i in 0 to 15 loop
@@ -50,7 +50,7 @@ begin
             assert display = expected_display(i) report "Erro!!! Numero: '" & integer'image(i) & "' nao mapeado corretamente!" severity error;
         end loop;
 
-        report "Fim do teste";
+        report "!======== Fim do testbench ========!";
         wait;
     end process;
 end architecture;
