@@ -19,7 +19,7 @@ begin
             when "0001" =>
                 display <= "10011111"; -- 1
             when "0010" =>
-				display <= "00100101"; -- 2
+		display <= "00100101"; -- 2
             when "0011" =>
                 display <= "00001101"; -- 3
             when "0100" =>
