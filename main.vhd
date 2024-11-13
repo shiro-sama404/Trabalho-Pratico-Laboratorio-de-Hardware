@@ -19,7 +19,7 @@ architecture structural of main is
 
     constant cycles_fpga        : natural                       := 50000000; -- frequência do clock da fpga
     constant senha              : natural range 0 to 255        := 180     ; -- Número usado como senha para destravar
-    constant tempo_para_desarme : natural range 0 to 255        := 10      ; -- Em segundos
+    constant tempo_para_desarme : natural range 0 to 255        := 16      ; -- Em segundos
 
     signal   segundos           : std_logic_vector(7 downto 0);              -- Tempo para desbloqueio
     signal   clk_50             : std_logic;                                 -- clock divido para 1hz
