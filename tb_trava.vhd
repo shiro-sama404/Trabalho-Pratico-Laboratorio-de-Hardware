@@ -53,7 +53,7 @@ begin
         wait for cycle_duration * tempo_para_desarme;
 
         input <= std_logic_vector(to_unsigned(senha, 8));
-        wait for 10 ns;
+        wait for cycle_duration;
         
         assert travado = '1' report "Trava desbloqueada com senha certa ("&integer'image(to_integer(unsigned(input)))&") fora do tempo de desarme ("&integer'image(to_integer(unsigned(segundos)))&")" severity error;
         
@@ -61,7 +61,7 @@ begin
         reset_fsm;
 
         input <= std_logic_vector(to_unsigned(111, 8));
-        wait for 10 ns;
+        wait for cycle_duration;
 
         assert travado = '1' report "Trava desbloqueada com senha errada ("&integer'image(to_integer(unsigned(input)))&") dentro do tempo de desarme ("&integer'image(to_integer(unsigned(segundos)))&")" severity error;
         
@@ -69,7 +69,7 @@ begin
         reset_fsm;
 
         input <= std_logic_vector(to_unsigned(senha, 8));
-        wait for 10 ns;
+        wait for cycle_duration;
         
         assert travado = '0' report "Trava bloqueada com senha certa ("&integer'image(to_integer(unsigned(input)))&") dentro do tempo de desarme ("&integer'image(to_integer(unsigned(segundos)))&")" severity error;
 

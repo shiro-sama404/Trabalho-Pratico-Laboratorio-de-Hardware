@@ -31,14 +31,15 @@ begin
             
         elsif rising_edge(clock) then
             if remaining_time > 0 then
-		 if to_integer(unsigned(input)) /= senha then
-			 remaining_time := remaining_time - 1;
-			 travado <= '1';
-		 else
-			 travado <= '0';
-		 end if;
+                if to_integer(unsigned(input)) /= senha then
+                    remaining_time := remaining_time - 1;
+                    travado <= '1';
+                else
+                    travado <= '0';
+                end if;
             end if;
         end if;
+
         segundos <= std_logic_vector(to_unsigned(remaining_time, 8));
     end process;
     
