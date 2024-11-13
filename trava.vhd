@@ -4,8 +4,8 @@ use ieee.numeric_std.all;
 
 entity trava is
     generic (
-        senha              : natural range 0 to 255;           -- Número usado como senha para destravar
-        tempo_para_desarme : natural range 0 to 255            -- Em segundos
+        senha              : natural range 0 to 255 := 0;      -- Número usado como senha para destravar
+        tempo_para_desarme : natural range 0 to 255 := 0       -- Em segundos
     );
 
     port (
@@ -31,12 +31,14 @@ begin
             
         elsif rising_edge(clock) then
             if remaining_time > 0 then
-                remaining_time := remaining_time - 1;
+		 if to_integer(unsigned(input)) /= senha then
+			 remaining_time := remaining_time - 1;
+			 travado <= '1';
+		 else
+			 travado <= '0';
+		 end if;
             end if;
-        elsif to_integer(unsigned(input)) = senha and remaining_time > 0 then
-            travado <= '0';
         end if;
-
         segundos <= std_logic_vector(to_unsigned(remaining_time, 8));
     end process;
     
