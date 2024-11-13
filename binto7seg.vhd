@@ -15,39 +15,39 @@ begin
     begin
         case input is
             when "0000" =>
-                display <= "11111100"; -- 0
+                display <= "00000011"; -- 0
             when "0001" =>
-                display <= "01100000"; -- 1
+                display <= "10011111"; -- 1
             when "0010" =>
-                display <= "11011010"; -- 2
+				display <= "00100101"; -- 2
             when "0011" =>
-                display <= "11110010"; -- 3
+                display <= "00001101"; -- 3
             when "0100" =>
-                display <= "01100110"; -- 4
+                display <= "10011001"; -- 4
             when "0101" =>
-                display <= "10110110"; -- 5
+                display <= "01001001"; -- 5
             when "0110" =>
-                display <= "10111110"; -- 6
+                display <= "01000001"; -- 6
             when "0111" =>
-                display <= "11100000"; -- 7
+                display <= "00011111"; -- 7
             when "1000" =>
-                display <= "11111100"; -- 8
+                display <= "00000001"; -- 8
             when "1001" =>
-                display <= "11100110"; -- 9
+                display <= "00011001"; -- 9
             when "1010" =>
-                display <= "11101110"; -- A
+                display <= "00010001"; -- A
             when "1011" =>
-                display <= "00111110"; -- b
+                display <= "11000001"; -- b
             when "1100" =>
-                display <= "10011100"; -- C
+                display <= "01100011"; -- C
             when "1101" =>
-                display <= "01111010"; -- d
+                display <= "10000101"; -- d
             when "1110" =>
-                display <= "10011110"; -- E
+                display <= "01100001"; -- E
             when "1111" =>
-                display <= "10001110"; -- F
+                display <= "01110001"; -- F
             when others =>
-                display <= "00000000"; -- padrão (apagado)
+                display <= "11111111"; -- padrão (apagado)
         end case;
 
     end process;
